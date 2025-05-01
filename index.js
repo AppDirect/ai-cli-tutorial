@@ -2,7 +2,7 @@ import { program } from "commander";
 import chalk from "chalk";
 import ora from "ora";
 import dotenv from "dotenv";
-import { listAIs, createAI, createChat, sendMessage } from "./api-handler.js";
+import { listAIs, createAI, createChat, sendMessage, queryAI } from "./api-handler.js";
 import xhr from 'xhr2';
 
 // This is not required in the browser
@@ -98,6 +98,23 @@ program
 
       eventSource.stream();
 
+    } catch (error) {
+      spinner.fail(chalk.red(`Error: ${error.message}`));
+    }
+  });
+
+program
+  .command("query-ai")
+  .description("Query an AI directly")
+  .requiredOption("-i, --id <id>", "id of the AI")
+  .argument("<message>", "message to send to AI")
+  .action(async (message, options) => {
+    const spinner = ora("Processing your query...").start();
+
+    try {
+      const response = await queryAI(options.id, message);
+      spinner.succeed("AI response:");
+      console.log(chalk.white(response.text));
     } catch (error) {
       spinner.fail(chalk.red(`Error: ${error.message}`));
     }

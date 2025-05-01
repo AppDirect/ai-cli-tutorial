@@ -63,7 +63,7 @@ export const createChat = async (aiId) => {
 
 export const sendMessage = async (chatId, message) => {
   try {
-    const eventSource = new SSE(  
+    const eventSource = new SSE(
       `${process.env.API_URL}/api/v1/chats/${chatId}`,
       {
         start: false,
@@ -81,6 +81,31 @@ export const sendMessage = async (chatId, message) => {
     );
 
     return eventSource;
+  } catch (error) {
+    throw new Error(`API Error: ${error.message}`);
+  }
+};
+
+export const queryAI = async (aiId, message) => {
+  try {
+    const response = await axios({
+      method: "post",
+      url: `${process.env.API_URL}/api/v1/chats/completions`,
+      data: {
+        messages: [
+          {
+            role: "user",
+            content: message,
+          },
+        ],
+        model: aiId,
+      },
+      headers: {
+        "X-Authorization": `Bearer ${process.env.API_KEY}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
   } catch (error) {
     throw new Error(`API Error: ${error.message}`);
   }

@@ -48,6 +48,15 @@ Options:
 - `-i, --instructions`: Custom instructions for the AI (optional)
 - `-a, --avatar`: URL for the AI's avatar image (optional)
 
+### Query an AI Directly
+```bash
+node index.js query-ai -i "AI_ID" "Your message here"
+```
+Send a one-off query to an AI without creating a chat session. This uses a direct query endpoint and returns the response immediately.
+Options:
+- `-i, --id`: ID of the AI to query (required)
+- Message: Your message to send to the AI (required)
+
 ### Create a Chat Session
 ```bash
 node index.js create-chat -i "AI_ID"
