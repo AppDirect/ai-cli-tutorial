@@ -2,8 +2,14 @@ import { program } from "commander";
 import chalk from "chalk";
 import ora from "ora";
 import dotenv from "dotenv";
-import { listAIs, createAI, createChat, sendMessage, queryAI } from "./api-handler.js";
-import xhr from 'xhr2';
+import {
+  listAIs,
+  createAI,
+  createChat,
+  sendMessage,
+  queryAI,
+} from "./api-handler.js";
+import xhr from "xhr2";
 
 // This is not required in the browser
 global.XMLHttpRequest = xhr;
@@ -97,7 +103,6 @@ program
       });
 
       eventSource.stream();
-
     } catch (error) {
       spinner.fail(chalk.red(`Error: ${error.message}`));
     }
@@ -114,7 +119,7 @@ program
     try {
       const response = await queryAI(options.id, message);
       spinner.succeed("AI response:");
-      console.log(chalk.white(response.text));
+      console.log(chalk.white(response.choices[0].message.content));
     } catch (error) {
       spinner.fail(chalk.red(`Error: ${error.message}`));
     }
