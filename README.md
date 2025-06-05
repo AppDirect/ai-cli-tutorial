@@ -1,6 +1,6 @@
 # AI CLI Tutorial Project
 
-This is a tutorial project that follows the [devs.ai API Tutorial](https://docs.devs.ai/docs/api-tutorial). The project demonstrates how to build a command-line interface for interacting with the devs.ai API, showcasing features like creating AI instances, managing chat sessions, and handling streaming responses.
+This is a tutorial project that follows the [devs.ai API Tutorial](https://docs.devs.ai/docs/api-tutorial). The project demonstrates how to build a command-line interface for interacting with the devs.ai API, showcasing features like creating AI instances, managing chat sessions, and handling streaming responses...
 
 ## Tutorial Overview
 
